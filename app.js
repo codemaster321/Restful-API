@@ -20,12 +20,11 @@ const articleSchema = {
 
 const Article = mongoose.model("Article", articleSchema);
 
-// const article1 = new Article({
-//   title: "this is title 1",
-//   content: "this is content 1",
-// });
-
-// article1.save().then(() => console.log("Stuff happens"));
+app.get("/articles", function (req, res) {
+  Article.find()
+    .then((foundArticles) => res.send(foundArticles))
+    .catch((err) => console.log(err));
+});
 
 app.listen(3000, function () {
   console.log("Listening at port 3000");
