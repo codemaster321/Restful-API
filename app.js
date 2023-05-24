@@ -26,6 +26,15 @@ app.get("/articles", function (req, res) {
     .catch((err) => console.log(err));
 });
 
+app.post("/articles", function (req, res) {
+  const newArticle = new Article({
+    name: req.body.title,
+    content: req.body.content,
+  });
+
+  newArticle.save();
+});
+
 app.listen(3000, function () {
   console.log("Listening at port 3000");
 });
