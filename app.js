@@ -35,6 +35,12 @@ app.post("/articles", function (req, res) {
   newArticle.save();
 });
 
+app.delete("/articles", (req, res) => {
+  Article.deleteMany()
+    .then(() => console.log("Deleted all articles"))
+    .catch((err) => console.log(err));
+});
+
 app.listen(3000, function () {
   console.log("Listening at port 3000");
 });
