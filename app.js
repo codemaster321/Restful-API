@@ -59,6 +59,14 @@ app
     )
       .then(() => res.send("successfully replaced the article, surrrr"))
       .catch((err) => res.send(err));
+  })
+  .patch((req, res) => {
+    Article.updateOne(
+      { title: req.params.articleTitle },
+      {
+        $set: req.body,
+      }
+    ).then(() => res.send("patched successfully daddyy"));
   });
 
 app.listen(3000, function () {
