@@ -44,11 +44,22 @@ app
 
 /////Requests tagretting  specific route
 
-app.route("/articles/:articleTitle").get((req, res) => {
-  Article.find({ title: req.params.articleTitle })
-    .then((foundArticle) => res.send(foundArticle))
-    .catch((err) => console.log(err));
-});
+app
+  .route("/articles/:articleTitle")
+  .get((req, res) => {
+    Article.find({ title: req.params.articleTitle })
+      .then((foundArticle) => res.send(foundArticle))
+      .catch((err) => console.log(err));
+  })
+  .put((req, res) => {
+    Article.replaceOne(
+      { title: req.params.articleTitle },
+      { title: req.body.title, content: req.body.content },
+      { overwrite: true }
+    )
+      .then(() => res.send("successfully replaced the article, surrrr"))
+      .catch((err) => res.send(err));
+  });
 
 app.listen(3000, function () {
   console.log("Listening at port 3000");
