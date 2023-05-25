@@ -20,6 +20,7 @@ const articleSchema = {
 
 const Article = mongoose.model("Article", articleSchema);
 
+/////Request targetting /articles
 app
   .route("/articles")
   .get(function (req, res) {
@@ -40,6 +41,14 @@ app
       .then(() => console.log("Deleted all articles"))
       .catch((err) => console.log(err));
   });
+
+/////Requests tagretting  specific route
+
+app.route("/articles/:articleTitle").get((req, res) => {
+  Article.find({ title: req.params.articleTitle })
+    .then((foundArticle) => res.send(foundArticle))
+    .catch((err) => console.log(err));
+});
 
 app.listen(3000, function () {
   console.log("Listening at port 3000");
