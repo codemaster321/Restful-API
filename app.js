@@ -67,6 +67,11 @@ app
         $set: req.body,
       }
     ).then(() => res.send("patched successfully daddyy"));
+  })
+  .delete((req, res) => {
+    Article.deleteMany({
+      title: req.params.articleTitle,
+    }).then(() => res.send("Deleted him sir, now give me my payment"));
   });
 
 app.listen(3000, function () {
